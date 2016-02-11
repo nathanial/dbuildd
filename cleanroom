@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -o errexit -o nounset
+set -x
+
+for dsc in "$@"; do
+    srcdir=$(dirname "$dsc")
+    pkgname=$(basename "$dsc" .dsc)
+
+    cd "$srcdir"
+    dpkg-source -x "${pkgname}.dsc"
+    cd "${pkgname/_/-}"
+    mk-build-deps --install --tool 'apt-retry-download --no-install-recommends --yes'
+    debuild -b -us -uc
+done

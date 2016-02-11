@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# behaves like 'apt-get', but will try three times to download packages. Useful
+# if the apt repository isn't 100% reliable.
+
+set -e
+
+apt-get -qq update && \
+for i in $(seq 3); do \
+  echo "attempt $i to download packages..."; \
+  apt-get --download-only "$@" && break; \
+done && \
+
+apt-get "$@"
