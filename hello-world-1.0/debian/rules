@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	echo "nothing to build -- it's that simple"
+
+override_dh_auto_install:
+	install -d debian/hello-world/usr/bin
+	cp hello-world debian/hello-world/usr/bin

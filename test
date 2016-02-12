@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -o errexit
+
+image=quay.io/paperg/cleanroom
+
+cleanup() {
+    [ -d "$tempdir" ] && sudo rm -rf "$tempdir"
+}
+
+test_unpacked() {
+    cp -r hello-world-1.0 "$tempdir"
+    echo "testing build from unpacked source"
+
+    if ! docker run --rm -v "$tempdir":/usr/src "$image" \
+        /usr/src/hello-world-1.0
+    then
+        echo "build from unpacked source failed" >&2
+        exit 1
+    fi
+
+    ls -lh "${tempdir}/hello-world_1.0_all.deb"
+}
+
+test_source() {
+    echo "building source package"
+    (cd hello-world-1.0 && debuild -us -uc -S)
+    mv hello-world_1.0{.dsc,.tar.*,_source.build,_source.changes} "$tempdir"
+
+    echo "testing build from source package"
+    if ! docker run --rm -v "$tempdir":/usr/src "$image" \
+        /usr/src/hello-world_1.0.dsc
+    then
+        echo "build from unpacked source failed" >&2
+        exit 1
+    fi
+
+    ls -lh "${tempdir}/hello-world_1.0_all.deb"
+}
+
+
+tempdir=$(mktemp --directory)
+trap cleanup EXIT
+
+docker build -t "$image" cleanroom
+
+test_unpacked
+cleanup
+tempdir=$(mktemp --directory)
+test_source
+
+echo "tests passed"

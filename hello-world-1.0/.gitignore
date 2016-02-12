@@ -1,0 +1,4 @@
+debian/files
+debian/hello-world.debhelper.log
+debian/hello-world.substvars
+debian/hello-world/

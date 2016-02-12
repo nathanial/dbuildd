@@ -1,0 +1,15 @@
+Source: hello-world
+Section: misc
+Priority: optional
+Maintainer: PaperG <developers@paperg.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://github.com/paperg/dbuildd
+Vcs-Git: https://github.com/paperg/dbuildd
+Vcs-Browser: https://github.com/paperg/dbuildd
+
+Package: hello-world
+Architecture: all
+Depends: ${misc:Depends}
+Description: Hello, world!
+ This is a very simple project which exists only to test cleanroom.

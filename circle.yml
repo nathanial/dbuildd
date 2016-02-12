@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - sudo apt-get install --no-install-recommends dpkg-dev
+
+test:
+  override:
+    - ./test

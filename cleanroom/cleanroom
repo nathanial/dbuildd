@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -o errexit -o nounset
+
+build_binary() {
+    pushd "$1"
+    mk-build-deps --install --tool 'apt-retry-download --no-install-recommends --yes'
+    debuild -b -us -uc
+    popd
+}
+
+build_source() {
+    dsc=$1
+    srcdir=$(dirname "$dsc")
+    pkgname=$(basename "$dsc" .dsc)
+
+    pushd "$srcdir"
+    dpkg-source -x "${pkgname}.dsc"
+    build_binary "${pkgname/_/-}"
+    popd
+}
+
+for thing in "$@"; do
+    if [[ "$thing" == *.dsc ]]; then
+        build_source "$thing"
+    elif [[ -d "$thing" ]]; then
+        build_binary "$thing"
+    elif [[ ! -e "$thing" ]]; then
+        echo "$thing does not exist" >&2
+        exit 1
+    else
+        echo "I don't know what to do with $thing" >&2
+        exit 1
+    fi
+done
