@@ -17,9 +17,13 @@ Suggested usage:
   1. Create an otherwise empty directory. We'll call it `$DIR`.
   2. Put the thing you want to build in that directory. The thing can be a
      source package and associated tarballs, or an already unpacked source tree.
-  3. Run `docker run -v $DIR:/usr/src quay.io/paperg/cleanroom
-     /usr/src/YOUR-PACKAGE.dsc` or `docker run -v $DIR:/usr/src
-     quay.io/paperg/cleanroom /usr/src/YOUR-SOURCE-TREE`
+  3. Run something like
+
+    docker run -v $DIR:/usr/src quay.io/paperg/cleanroom cleanroom /usr/src/YOUR-PACKAGE.dsc
+
+or
+
+    docker run -v $DIR:/usr/src quay.io/paperg/cleanroom cleanroom /usr/src/YOUR-SOURCE-TREE
 
 If all goes well, you should be left with `.deb` binary packages in `$DIR`.
 
