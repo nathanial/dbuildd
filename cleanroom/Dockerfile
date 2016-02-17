@@ -11,5 +11,4 @@ RUN apt-get update && \
     apt-get install --yes $packages
 
 COPY cleanroom apt-retry-download /usr/bin/
-ENTRYPOINT ["/usr/bin/cleanroom"]
 WORKDIR /usr/src
