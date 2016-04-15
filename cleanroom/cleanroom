@@ -4,7 +4,9 @@ set -o errexit -o nounset
 
 build_binary() {
     pushd "$1"
+    echo "installing build dependencies"
     mk-build-deps --install --tool 'apt-retry-download --no-install-recommends --yes'
+    echo "building binary package"
     debuild -b -us -uc
     popd
 }
