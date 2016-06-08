@@ -10,5 +10,7 @@ RUN apt-get update && \
     done && \
     apt-get install --yes $packages
 
+RUN apt-get install --yes php5-cli php5-curl unzip npm nodejs-legacy bundler
+
 COPY cleanroom apt-retry-download /usr/bin/
 WORKDIR /usr/src
