@@ -15,11 +15,10 @@ RUN apt-get install --yes php5-cli php5-curl unzip npm nodejs-legacy bundler \
 						libaprutil1 libaprutil1-dev libexpat1-dev libfontconfig1 libfreetype6 \
   					libldap2-dev libpng12-0 libsctp-dev libsctp1 php5-xdebug uuid-dev
 
-RUN mkdir /usr/src/placelocal
-WORKDIR /usr/src/placelocal
+WORKDIR /usr/src/
 
-ADD package.json /usr/src/placelocal/package.json
-ADD Gemfile /usr/src/placelocal/Gemfile
+ADD package.json /usr/src/package.json
+ADD Gemfile /usr/src/Gemfile
 
 RUN bundle
 RUN npm install
