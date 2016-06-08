@@ -2,7 +2,7 @@
 
 set -o errexit
 
-image=quay.io/paperg/cleanroom
+image=quay.io/nathanial/cleanroom
 
 cleanup() {
     [ -d "$tempdir" ] && sudo rm -rf "$tempdir"
