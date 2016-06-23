@@ -82,7 +82,7 @@
     "grunt-text-replace": "~0.3.9",
     "grunt-todos": "^0.3.0",
     "grunt-ts": "^5.5.1",
-    "grunt-tsd": "^0.1.0",
+    "grunt-typings": "^0.1.5",
     "jade": "~1.1.5",
     "jasmine-core": "^2.2.0",
     "jquery": "~1.11.0",
@@ -110,6 +110,7 @@
     "time-grunt": "^1.0.0",
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
+    "typings": "^1.0.4",
     "underscore": "~1.5.2",
     "wrench": "^1.5.8"
   }
