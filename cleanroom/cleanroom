@@ -5,3 +5,4 @@ set -o errexit -o nounset
 cd /usr/src/placelocal
 make clean
 make
+make test
