@@ -21,6 +21,7 @@ WORKDIR /usr/thunder-cache
 RUN mkdir -p /usr/bin/composer
 RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir='/usr/bin/composer' --filename=composer
 
+RUN npm install -g phantomjs-prebuilt
 ADD package.json /usr/thunder-cache/package.json
 ADD Gemfile /usr/thunder-cache/Gemfile
 ADD composer.json /usr/thunder-cache/composer.json
